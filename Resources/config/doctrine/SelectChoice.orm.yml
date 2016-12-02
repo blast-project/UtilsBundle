@@ -1,5 +1,5 @@
 # Entity to persist select choices lists
-Blast\CoreBundle\Entity\SelectChoice:
+Blast\UtilsBundle\Entity\SelectChoice:
     type: entity
     table: select_choice
     blast:
