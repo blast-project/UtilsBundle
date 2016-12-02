@@ -1,6 +1,6 @@
 <?php
 
-namespace Blast\CoreBundle\Entity;
+namespace Blast\UtilsBundle\Entity;
 
 use Blast\BaseEntitiesBundle\Entity\Traits\BaseEntity;
 use Blast\BaseEntitiesBundle\Entity\Traits\Jsonable;
