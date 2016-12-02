@@ -16,7 +16,6 @@ class CustomCheckboxType extends BaseAbstractType
 
     public function getName()
     {
-
         return 'blast_custom_checkbox';
     }
 
