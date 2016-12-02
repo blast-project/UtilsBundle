@@ -5,6 +5,7 @@
     "require": {
         "symfony/symfony": "2.8.*",
         "sonata-project/doctrine-orm-admin-bundle": "3.x-dev",
+        "blast-project/core-bundle": "dev-master",
         "twig/twig": "^1.24",
         "stfalcon/tinymce-bundle": "2.1"
     },

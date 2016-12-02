@@ -1,0 +1,30 @@
+services:
+    
+    ######### FORM TYPES ###########
+    blast_utils.form.type.tinymce:
+        class: Blast\UtilsBundle\Form\Type\TinyMceType
+        tags:
+            - { name: form.type, alias: blast_tinymce }
+            
+    blast_utils.form.type.customchoice:
+        class: Blast\UtilsBundle\Form\Type\CustomChoiceType
+        tags:
+            - { name: form.type, alias: blast_custom_choice }
+        arguments: [ @doctrine.orm.entity_manager ]
+        
+    blast_utils.form.type.customcheckbox:
+        class: Blast\UtilsBundle\Form\Type\CustomCheckboxType
+        tags:
+            - { name: form.type, alias: blast_custom_checkbox }
+
+    #########  TWIG EXTENSIONS ############
+    blast_utils.twig.base_extension:
+        class: Blast\UtilsBundle\Twig\Extensions\BaseExtension
+        tags: [{ name: twig.extension }]
+        calls:
+            - [setRouter,[@router]]
+    
+    blast_utils.twig_extension.html2text:
+        class: Blast\UtilsBundle\Twig\Extensions\Html2textExtension
+        tags:
+            - { name: twig.extension }

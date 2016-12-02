@@ -1,0 +1,3 @@
+blast_utils.choice.add:
+    path:     blast/ajax/choices/add
+    defaults: { _controller: BlastUtilsBundle:Choice:addChoice }
