@@ -75,7 +75,6 @@ class CustomChoiceChoiceLoader implements ChoiceLoaderInterface
                     $this->manager->persist($newChoice);
                 }
             }
-            $this->manager->flush();
         }
 
         $choices = $repository->findBy(['label' => $field]);
