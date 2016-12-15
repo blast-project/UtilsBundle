@@ -1,3 +1,7 @@
 blast_utils.choice.add:
     path:     blast/ajax/choices/add
     defaults: { _controller: BlastUtilsBundle:Choice:addChoice }
+    
+blast_utils.unique_field.check_availability:
+    path: blast/ajax/unique/check
+    defaults: { _controller: BlastUtilsBundle:UniqueField:checkAvailability}

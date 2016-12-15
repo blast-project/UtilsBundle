@@ -16,6 +16,11 @@ services:
         class: Blast\UtilsBundle\Form\Type\CustomCheckboxType
         tags:
             - { name: form.type, alias: blast_custom_checkbox }
+            
+    blast_utils.form.type.uniquefield:
+        class: Blast\UtilsBundle\Form\Type\UniqueFieldType
+        tags:
+            - { name: form.type, alias: blast_unique_field }
 
     #########  TWIG EXTENSIONS ############
     blast_utils.twig.base_extension:
