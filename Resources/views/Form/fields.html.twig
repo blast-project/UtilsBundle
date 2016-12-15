@@ -19,7 +19,7 @@
 
 {% block blast_unique_field_widget %}
     {% set attr = attr|merge({
-        'class'             : attr.class|default('') ~ ' auto-check-input',
+        'class'             : attr.class|default('') ~ ' blast-unique-field',
         'data-class'        : sonata_admin.admin.class,
         'data-field'        : sonata_admin.name,
         'data-url'          : path('blast_utils.unique_field.check_availability'),
@@ -27,42 +27,4 @@
     }) %}
     
     {{ block('form_widget') }}
-    
-    <script type="text/javascript">
-        $(document).ready(function(){
-            
-            $('.auto-check-input')
-                .focus(function(){
-                    $(this).closest('.form-group').removeClass('has-error');
-                    $(this).siblings('.help-block').remove();
-                })
-                .change(function(){
-
-                    var input = $(this);
-                    var value = input.val();
-                    var fieldName = input.data('field');
-
-                    if( value != '' )
-                        $.post(
-                            $(this).data('url'),
-                            {
-                                'className' : $(this).data('class'),
-                                'fieldName' : fieldName,
-                                'fieldValue': value
-                            },
-                            function(response){
-                                if( !response )
-                                {
-                                    input.closest('.form-group').addClass('has-error');
-
-                                    $('<div class="help-block sonata-ba-field-error-messages"></div>')
-                                        .html('<i class="fa fa-exclamation-circle" aria-hidden="true"></i> ' + value  + ' ' + input.data('error-message'))
-                                        .appendTo(input.closest('.sonata-ba-field'))
-                                    ;
-                                }
-                            }
-                        );
-                });
-        });
-    </script>
 {% endblock %}
