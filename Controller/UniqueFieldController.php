@@ -15,10 +15,27 @@ class UniqueFieldController extends Controller
      */
     public function checkAvailabilityAction(Request $request)
     {   
+        $response = [ 'available' => true ];
+        $translator = $this->get('translator');
         $repo = $this->getDoctrine()->getManager()->getRepository($request->get('className'));
+ 
+        $object = $repo->findOneBy([$request->get('fieldName') => $request->get('fieldValue')]);
         
-        $result = $repo->findBy([$request->get('fieldName') => $request->get('fieldValue')]);
+        if( $object != null )
+        {
+            $response['available'] = false;
+            $response['error'] = $this->get('translator')->trans('already exists');
         
-        return new JsonResponse(!count($result) > 0, 200);
+            if( $request->get('returnLink') == true )   
+            {
+                $adminPool = $this->container->get('sonata.admin.pool');
+                $admin = $adminPool->getAdminByAdminCode($request->get('adminCode'));
+
+                $response['link'] = $admin->generateObjectUrl('edit', $object); 
+                $response['message'] = $translator->trans('Edit object');
+            }
+        }
+        
+        return new JsonResponse($response, 200);
     }
 }

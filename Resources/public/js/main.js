@@ -18,19 +18,30 @@ var addUniqueFieldsListener = function(){
 
             if( value != '' )
                 $.post(
-                    $(this).data('url'),
+                    input.data('url'),
                     {
-                        'className' : $(this).data('class'),
+                        'className' : input.data('class'),
                         'fieldName' : fieldName,
-                        'fieldValue': value
+                        'fieldValue': value,
+                        'adminCode' : input.data('admin-code'),
+                        'returnLink': input.data('return-link')
                     },
                     function(response){
-                        if( !response )
+                        if( !response.available )
                         {
                             input.closest('.form-group').addClass('has-error');
-
+                            
+                            var message = 
+                                '<i class="fa fa-exclamation-circle" aria-hidden="true"></i> ' +
+                                value + ' ' + 
+                                response.error
+                            ;
+                            
+                            if(response.link != undefined)
+                                message += '<p><a href="' + response.link + '">' + response.message + '</a></p>';
+                            
                             $('<div class="help-block sonata-ba-field-error-messages"></div>')
-                                .html('<i class="fa fa-exclamation-circle" aria-hidden="true"></i> ' + value  + ' ' + input.data('error-message'))
+                                .html(message)
                                 .appendTo(input.closest('.sonata-ba-field'))
                             ;
                         }
