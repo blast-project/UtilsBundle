@@ -8,3 +8,7 @@ and open the template in the editor.
     Author     : romain
 */
 
+a.add-choice, a.add-choice:hover {
+    
+    border: none;
+}
