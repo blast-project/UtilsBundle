@@ -9,21 +9,26 @@
         "twig/twig": "^1.24",
         "stfalcon/tinymce-bundle": "2.1"
     },
-    "license":  "GPL-3.0",
-    "keywords": ["utils", "blast", "sonata", "symfony"],
+    "license": "GPL-3.0",
+    "keywords": [
+        "utils",
+        "blast",
+        "sonata",
+        "symfony"
+    ],
     "homepage": "https://github.com/blast-project/UtilsBundle",
     "authors": [
         {
-           "name": "Baptiste SIMON",
-           "email": "baptiste.simon@libre-informatique.fr"
+            "name": "Baptiste SIMON",
+            "email": "baptiste.simon@libre-informatique.fr"
         },
         {
-           "name": "Marcos Bezerra de Menezes",
-           "email": "marcos.bezerrademenezes@libre-informatique.fr"
+            "name": "Marcos Bezerra de Menezes",
+            "email": "marcos.bezerrademenezes@libre-informatique.fr"
         },
         {
-           "name": "Romain SANCHEZ",
-           "email": "romain.sanchez@libre-informatique.fr"
+            "name": "Romain SANCHEZ",
+            "email": "romain.sanchez@libre-informatique.fr"
         },
         {
             "name": "Libre Informatique",
@@ -31,7 +36,10 @@
         }
     ],
     "autoload": {
-        "psr-4": { "Blast\\UtilsBundle\\": "" }
+        "psr-4": {
+            "Blast\\UtilsBundle\\": "src/",
+            "Blast\\UtilsBundle\\Tests\\": "tests/"
+        }
     },
     "suggest": {
         "blast-project/outer-extension-bundle": "Extend your doctrine entities from the outside"
