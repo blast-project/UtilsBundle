@@ -6,6 +6,6 @@
 
 [![Latest Stable Version](https://poser.pugx.org/blast-project/utils-bundle/v/stable)](https://packagist.org/packages/blast-project/utils-bundle)
 [![Latest Unstable Version](https://poser.pugx.org/blast-project/utils-bundle/v/unstable)](https://packagist.org/packages/blast-project/utils-bundle)
-[![Total Downloads](https://poser.pugx.org/blast-project/utils-bundle/downloads)](https://packagist.org/packages/blast-project/doctrine-pgsql-bundle)
+[![Total Downloads](https://poser.pugx.org/blast-project/utils-bundle/downloads)](https://packagist.org/packages/blast-project/utils-bundle)
 
 
