@@ -4,8 +4,8 @@
     "description": "All kinds of goodies for the BlastCoreBundle",
     "require": {
         "symfony/symfony": "3.2.*",
-        "sonata-project/doctrine-orm-admin-bundle": "3.x-dev",
-        "blast-project/core-bundle": "dev-master",
+        "sonata-project/doctrine-orm-admin-bundle": "^3.1",
+        "blast-project/core-bundle": "^0.4",
         "twig/twig": "^1.24",
         "stfalcon/tinymce-bundle": "2.1"
     },
