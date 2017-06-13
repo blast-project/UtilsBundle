@@ -1,5 +1,15 @@
 # Change Log
 
+## [0.4.3](https://github.com/blast-project/UtilsBundle/tree/0.4.3) (2017-06-13)
+[Full Changelog](https://github.com/blast-project/UtilsBundle/compare/0.4.2...0.4.3)
+
+**Merged pull requests:**
+
+- DevKit updates for UtilsBundle [\#8](https://github.com/blast-project/UtilsBundle/pull/8) ([BlastCI](https://github.com/BlastCI))
+- DevKit updates for UtilsBundle [\#7](https://github.com/blast-project/UtilsBundle/pull/7) ([BlastCI](https://github.com/BlastCI))
+- DevKit updates for UtilsBundle [\#6](https://github.com/blast-project/UtilsBundle/pull/6) ([BlastCI](https://github.com/BlastCI))
+- DevKit updates for UtilsBundle [\#4](https://github.com/blast-project/UtilsBundle/pull/4) ([BlastCI](https://github.com/BlastCI))
+
 ## [0.4.2](https://github.com/blast-project/UtilsBundle/tree/0.4.2) (2017-05-04)
 [Full Changelog](https://github.com/blast-project/UtilsBundle/compare/0.2...0.4.2)
 
