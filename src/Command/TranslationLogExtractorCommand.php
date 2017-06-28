@@ -51,8 +51,6 @@ class TranslationLogExtractorCommand extends ContainerAwareCommand
         $format = strtoupper($input->getOption('format'));
         $purge = $input->getOption('purge');
 
-        var_dump($purge);
-
         if (!in_array($format, $this->supportedFormats)) {
             $io->error(sprintf('Output format %s is not supported. Allowed formats: %s', $format, implode(',', $supportedFormats)));
 
