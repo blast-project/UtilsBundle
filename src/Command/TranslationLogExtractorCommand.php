@@ -22,7 +22,7 @@ use Symfony\Component\Yaml\Yaml;
 class TranslationLogExtractorCommand extends ContainerAwareCommand
 {
     private $translations = [];
-    private $supportedFormats = ['JSON', 'CSV', 'XML', 'YML', 'CONSOLE'];
+    private $supportedFormats = ['JSON', 'CSV', 'XML', 'YML', 'YAML', 'CONSOLE'];
 
     protected function configure()
     {
@@ -39,9 +39,8 @@ class TranslationLogExtractorCommand extends ContainerAwareCommand
             ->addOption(
                 'purge',
                 'p',
-                InputOption::VALUE_OPTIONAL,
-                'Removes the parsed log entries',
-                false
+                InputOption::VALUE_NONE,
+                'Removes the parsed log entries'
             );
     }
 
@@ -50,7 +49,9 @@ class TranslationLogExtractorCommand extends ContainerAwareCommand
         $io = new SymfonyStyle($input, $output);
 
         $format = strtoupper($input->getOption('format'));
-        $purge = strtoupper($input->getOption('purge'));
+        $purge = $input->getOption('purge');
+
+        var_dump($purge);
 
         if (!in_array($format, $this->supportedFormats)) {
             $io->error(sprintf('Output format %s is not supported. Allowed formats: %s', $format, implode(',', $supportedFormats)));
@@ -77,7 +78,13 @@ class TranslationLogExtractorCommand extends ContainerAwareCommand
 
     private function parseLog($pathname, $io, $purge)
     {
-        $handle = fopen($pathname, 'rw');
+
+        if($purge) {
+            $handleTmp = fopen($pathname.'.tmp', 'w');
+        }
+
+
+        $handle = fopen($pathname, 'r');
         if ($handle) {
             while (($line = fgets($handle)) !== false) {
                 if (substr($line, 22, 19) === 'translation.WARNING') {
@@ -95,9 +102,19 @@ class TranslationLogExtractorCommand extends ContainerAwareCommand
                     }
 
                     if ($purge) {
-                        fwrite();
+                        if (flock($handle, LOCK_EX)) {
+                            $writeSuccess = fwrite($handle, ' ');
+                            flock($handle, LOCK_UN);
+                        }
                     }
+                } elseif($purge) {
+                    fputs($handleTmp,$line);
                 }
+            }
+
+            if($purge) {
+                fclose($handleTmp);
+                rename($pathname.'.tmp',$pathname);
             }
 
             fclose($handle);
@@ -122,6 +139,7 @@ class TranslationLogExtractorCommand extends ContainerAwareCommand
             break;
 
             case 'YML':
+            case 'YAML':
             $this->displayYmlResult($io);
             break;
 
