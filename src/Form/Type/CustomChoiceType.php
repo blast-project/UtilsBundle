@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace Blast\UtilsBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,7 +24,6 @@ use Blast\UtilsBundle\Form\DataTransformer\MultipleChoiceTransformer;
 
 class CustomChoiceType extends BaseAbstractType
 {
-
     /** @var EntityManager */
     private $manager;
 
@@ -31,8 +40,8 @@ class CustomChoiceType extends BaseAbstractType
         return 'choice';
     }
 
-    public function getBlockPrefix(){
-
+    public function getBlockPrefix()
+    {
         return 'blast_custom_choice';
     }
 
@@ -46,10 +55,10 @@ class CustomChoiceType extends BaseAbstractType
         };
 
         $resolver->setDefaults([
-            'placeholder'   => '',
+            'placeholder' => '',
             'choices_class' => $defaultClass,
             'choice_loader' => $choiceLoader,
-            'is_filter'     => false
+            'is_filter' => false,
         ]);
         $resolver->setRequired(['choices_class', 'choices_field']);
         $resolver->setDefined('blast_choices');
@@ -65,8 +74,8 @@ class CustomChoiceType extends BaseAbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if ($options['multiple'] == true)
+        if ($options['multiple'] == true) {
             $builder->addModelTransformer(new MultipleChoiceTransformer());
+        }
     }
-
 }

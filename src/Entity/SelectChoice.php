@@ -1,18 +1,28 @@
 <?php
 
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace Blast\UtilsBundle\Entity;
 
 use Blast\BaseEntitiesBundle\Entity\Traits\BaseEntity;
 use Blast\BaseEntitiesBundle\Entity\Traits\Jsonable;
 
 /**
- * SelectChoice
+ * SelectChoice.
  */
 class SelectChoice implements \JsonSerializable
 {
     use BaseEntity;
     use Jsonable;
-    
+
     /**
      * @var string
      */
@@ -24,7 +34,7 @@ class SelectChoice implements \JsonSerializable
     private $value;
 
     /**
-     * Set label
+     * Set label.
      *
      * @param string $label
      *
@@ -38,7 +48,7 @@ class SelectChoice implements \JsonSerializable
     }
 
     /**
-     * Get label
+     * Get label.
      *
      * @return string
      */
@@ -48,7 +58,7 @@ class SelectChoice implements \JsonSerializable
     }
 
     /**
-     * Set value
+     * Set value.
      *
      * @param string $value
      *
@@ -62,7 +72,7 @@ class SelectChoice implements \JsonSerializable
     }
 
     /**
-     * Get value
+     * Get value.
      *
      * @return string
      */

@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace Blast\UtilsBundle\Twig\Extensions;
 
 use Symfony\Component\Routing\RouterInterface;
@@ -38,9 +48,9 @@ class BaseExtension extends \Twig_Extension
     /**
      * @param string $name
      *
-     * @return boolean
+     * @return bool
      */
-    function routeExists($name)
+    public function routeExists($name)
     {
         return (null === $this->router->getRouteCollection()->get($name)) ? false : true;
     }
@@ -51,7 +61,7 @@ class BaseExtension extends \Twig_Extension
      *
      * @return bool
      */
-    function isFunctionLoaded(Twig_Environment $twig, $name)
+    public function isFunctionLoaded(Twig_Environment $twig, $name)
     {
         return $twig->getFunction($name) !== false;
     }
@@ -62,31 +72,31 @@ class BaseExtension extends \Twig_Extension
      *
      * @return bool
      */
-    function isExtensionLoaded(Twig_Environment $twig, $name)
+    public function isExtensionLoaded(Twig_Environment $twig, $name)
     {
         return $twig->hasExtension($name);
     }
 
     /**
-     * @param object           $object
-     * @param string           $class
+     * @param object $object
+     * @param string $class
      *
      * @return bool
      */
-    function isObjectInstanceOf($object, $class)
+    public function isObjectInstanceOf($object, $class)
     {
         return $object instanceof $class;
     }
 
     /**
-     * Test usage in template : {{ myobject is instanceof(myclass) }}
+     * Test usage in template : {{ myobject is instanceof(myclass) }}.
      *
-     * @param object           $object
-     * @param string           $class
+     * @param object $object
+     * @param string $class
      *
      * @return bool
      */
-    function isInstanceof($object, $class)
+    public function isInstanceof($object, $class)
     {
         return $object instanceof $class;
     }
@@ -98,7 +108,7 @@ class BaseExtension extends \Twig_Extension
      *
      * @return bool
      */
-    function getBlockFromTemplate($twig, $template, $block, $vars = [])
+    public function getBlockFromTemplate($twig, $template, $block, $vars = [])
     {
         return $twig
             ->loadTemplate($template)

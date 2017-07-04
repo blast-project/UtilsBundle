@@ -76,11 +76,9 @@ class TranslationLogExtractorCommand extends ContainerAwareCommand
 
     private function parseLog($pathname, $io, $purge)
     {
-
-        if($purge) {
+        if ($purge) {
             $handleTmp = fopen($pathname.'.tmp', 'w');
         }
-
 
         $handle = fopen($pathname, 'r');
         if ($handle) {
@@ -105,14 +103,14 @@ class TranslationLogExtractorCommand extends ContainerAwareCommand
                             flock($handle, LOCK_UN);
                         }
                     }
-                } elseif($purge) {
-                    fputs($handleTmp,$line);
+                } elseif ($purge) {
+                    fputs($handleTmp, $line);
                 }
             }
 
-            if($purge) {
+            if ($purge) {
                 fclose($handleTmp);
-                rename($pathname.'.tmp',$pathname);
+                rename($pathname.'.tmp', $pathname);
             }
 
             fclose($handle);
