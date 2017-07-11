@@ -32,7 +32,7 @@ class UniqueFieldType extends BaseAbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'return_link' => 'false',
+            'return_link' => 'false'
         ]);
 
         $resolver->setDefined('return');
