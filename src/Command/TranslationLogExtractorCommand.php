@@ -62,7 +62,7 @@ class TranslationLogExtractorCommand extends ContainerAwareCommand
         }
 
         $logDir = $this->getContainer()->get('kernel')->getLogDir();
-        $logFile = $logDir.'/dev.log';
+        $logFile = $logDir . '/dev.log';
 
         if (is_file($logFile)) {
             $this->parseLog($logFile, $io, $purge);
@@ -77,7 +77,7 @@ class TranslationLogExtractorCommand extends ContainerAwareCommand
     private function parseLog($pathname, $io, $purge)
     {
         if ($purge) {
-            $handleTmp = fopen($pathname.'.tmp', 'w');
+            $handleTmp = fopen($pathname . '.tmp', 'w');
         }
 
         $handle = fopen($pathname, 'r');
@@ -110,7 +110,7 @@ class TranslationLogExtractorCommand extends ContainerAwareCommand
 
             if ($purge) {
                 fclose($handleTmp);
-                rename($pathname.'.tmp', $pathname);
+                rename($pathname . '.tmp', $pathname);
             }
 
             fclose($handle);
@@ -167,7 +167,7 @@ class TranslationLogExtractorCommand extends ContainerAwareCommand
         $totalTranslations = count($this->translations);
         $count = 0;
         foreach ($this->translations as $sign => $translation) {
-            $io->text(json_encode($translation, JSON_FORCE_OBJECT).($count < $totalTranslations - 1 ? ',' : ''));
+            $io->text(json_encode($translation, JSON_FORCE_OBJECT) . ($count < $totalTranslations - 1 ? ',' : ''));
             ++$count;
         }
         $io->text(']');
@@ -176,7 +176,7 @@ class TranslationLogExtractorCommand extends ContainerAwareCommand
     private function displayYmlResult($io)
     {
         array_walk($this->translations, function ($object, $key) use ($io) {
-            $io->text(Yaml::dump($object->id, 0, 4, Yaml::DUMP_MULTI_LINE_LITERAL_BLOCK).': ~');
+            $io->text(Yaml::dump($object->id, 0, 4, Yaml::DUMP_MULTI_LINE_LITERAL_BLOCK) . ': ~');
         });
     }
 
