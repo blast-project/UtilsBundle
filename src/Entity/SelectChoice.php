@@ -80,4 +80,12 @@ class SelectChoice implements \JsonSerializable
     {
         return $this->value;
     }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) $this->value;
+    }
 }

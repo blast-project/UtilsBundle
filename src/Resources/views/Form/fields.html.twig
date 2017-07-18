@@ -1,7 +1,7 @@
 
 {% block blast_tinymce_widget %}
     {% spaceless %}
-        <textarea class="tinymce form-control" id="{{ id }}" name="{{ full_name }}" data-theme="advanced">{{ value }}</textarea>    
+        <textarea class="tinymce form-control" id="{{ id }}" name="{{ full_name }}" data-theme="advanced">{{ value }}</textarea>
     {% endspaceless%}
 {% endblock %}
 
@@ -26,6 +26,6 @@
         'data-url'          : path('blast_utils.unique_field.check_availability'),
         'data-return-link'  : return_link
     }) %}
-    
+
     {{ block('form_widget') }}
 {% endblock %}

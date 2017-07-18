@@ -69,11 +69,13 @@ class CustomChoiceChoiceLoader implements ChoiceLoaderInterface
         if (isset($this->options['blast_choices'])) {
             foreach ($this->options['blast_choices'] as $choice) {
                 if ($repository->findBy(array('label' => $field, 'value' => $choice)) == null) {
+                    $updated = true;
                     $newChoice = new $class();
                     $newChoice->setLabel($field);
                     $newChoice->setValue($choice);
 
                     $this->manager->persist($newChoice);
+                    $this->manager->flush($newChoice);
                 }
             }
         }
