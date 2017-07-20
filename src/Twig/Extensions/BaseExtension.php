@@ -38,6 +38,13 @@ class BaseExtension extends \Twig_Extension
         ];
     }
 
+    public function getFilters()
+    {
+        return [
+            new \Twig_SimpleFilter('trimArray', [$this, 'trimArray']),
+        ];
+    }
+
     public function getTests()
     {
         return [
@@ -114,6 +121,18 @@ class BaseExtension extends \Twig_Extension
             ->loadTemplate($template)
             ->renderBlock($block, $vars)
         ;
+    }
+
+    /**
+     * trimArray trims all array items.
+     *
+     * @param array $array
+     *
+     * @return array
+     */
+    public function trimArray($array)
+    {
+        return array_map('trim', $array);
     }
 
     /**
