@@ -1,5 +1,18 @@
 # Change Log
 
+## [Unreleased](https://github.com/blast-project/UtilsBundle/tree/HEAD)
+
+[Full Changelog](https://github.com/blast-project/UtilsBundle/compare/0.4.4...HEAD)
+
+**Merged pull requests:**
+
+- Lisem fix & features [\#14](https://github.com/blast-project/UtilsBundle/pull/14) ([FanchTheSystem](https://github.com/FanchTheSystem))
+- DevKit updates for UtilsBundle [\#13](https://github.com/blast-project/UtilsBundle/pull/13) ([BlastCI](https://github.com/BlastCI))
+- DevKit updates for UtilsBundle [\#12](https://github.com/blast-project/UtilsBundle/pull/12) ([BlastCI](https://github.com/BlastCI))
+- Wip lisem [\#11](https://github.com/blast-project/UtilsBundle/pull/11) ([FanchTheSystem](https://github.com/FanchTheSystem))
+- DevKit updates for UtilsBundle [\#10](https://github.com/blast-project/UtilsBundle/pull/10) ([BlastCI](https://github.com/BlastCI))
+- DevKit updates for UtilsBundle [\#9](https://github.com/blast-project/UtilsBundle/pull/9) ([BlastCI](https://github.com/BlastCI))
+
 ## [0.4.4](https://github.com/blast-project/UtilsBundle/tree/0.4.4) (2017-06-27)
 [Full Changelog](https://github.com/blast-project/UtilsBundle/compare/0.4.3...0.4.4)
 
