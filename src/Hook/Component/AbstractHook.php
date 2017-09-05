@@ -37,9 +37,8 @@ abstract class AbstractHook
      */
     public function handleParameters($hookParameters)
     {
-
     }
-    
+
     /**
      * @return string
      */
