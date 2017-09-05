@@ -36,7 +36,7 @@ services:
 
     #########  HOOK SYSTEM ############
     blast_utils.hook.registry:
-        class: Blast\UtilsBundle\Hook\Registry
+        class: Blast\UtilsBundle\Hook\Component\Registry
 
     blast_utils.twig.hook:
         class: Blast\UtilsBundle\Twig\Extensions\Hook
@@ -46,7 +46,7 @@ services:
             - { name: twig.extension }
 
     blast_utils.hook.listener:
-        class: Blast\UtilsBundle\Hook\Event\HookListener
+        class: Blast\UtilsBundle\Hook\Component\Event\HookListener
         calls:
             - [setRegistry, ['@blast_utils.hook.registry']]
             - [setTemplating, ['@templating']]
@@ -55,7 +55,22 @@ services:
 
 
     #########  HOOKS ############
-    # blast_utils.hook.custom_filters.save:
-    #     class: Blast\UtilsBundle\Hook\CustomFilters\Save
-    #     tags:
-    #         - { name: blast.hook }
+    blast_utils.hooks.layout.javascripts:
+        class: Blast\UtilsBundle\Hook\Hooks\Layout\Javascripts
+        tags:
+            - { name: blast.hook }
+
+    blast_utils.hooks.layout.stylesheets:
+        class: Blast\UtilsBundle\Hook\Hooks\Layout\Stylesheets
+        tags:
+            - { name: blast.hook }
+
+    blast_utils.hooks.custom_filters.dropdown:
+        class: Blast\UtilsBundle\Hook\Hooks\CustomFilters\Dropdown
+        tags:
+            - { name: blast.hook }
+
+    blast_utils.hooks.custom_filters.save:
+        class: Blast\UtilsBundle\Hook\Hooks\CustomFilters\Save
+        tags:
+            - { name: blast.hook }

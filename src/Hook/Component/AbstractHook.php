@@ -10,7 +10,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Blast\UtilsBundle\Hook;
+namespace Blast\UtilsBundle\Hook\Component;
 
 abstract class AbstractHook
 {
@@ -35,8 +35,11 @@ abstract class AbstractHook
      * the block template will be rendered. Please override this method to set
      * the view parameters of your block.
      */
-    abstract public function handleParameters($hookParameters);
+    public function handleParameters($hookParameters)
+    {
 
+    }
+    
     /**
      * @return string
      */

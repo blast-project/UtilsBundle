@@ -10,7 +10,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Blast\UtilsBundle\Hook\Event;
+namespace Blast\UtilsBundle\Hook\Component\Event;
 
 use Symfony\Component\EventDispatcher\Event;
 
@@ -37,7 +37,7 @@ class HookEvent extends Event
      * @param string $hookName
      * @param array  $hookParameters
      */
-    public function __construct($hookName, $hookParameters)
+    public function __construct($hookName = null, $hookParameters = null)
     {
         $this->hookName = $hookName;
         $this->hookParameters = $hookParameters;
