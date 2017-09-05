@@ -1,22 +1,22 @@
 services:
-    
+
     ######### FORM TYPES ###########
     blast_utils.form.type.tinymce:
         class: Blast\UtilsBundle\Form\Type\TinyMceType
         tags:
             - { name: form.type, alias: blast_tinymce }
-            
+
     blast_utils.form.type.customchoice:
         class: Blast\UtilsBundle\Form\Type\CustomChoiceType
         tags:
             - { name: form.type, alias: blast_custom_choice }
         arguments: [ '@doctrine.orm.entity_manager' ]
-        
+
     blast_utils.form.type.customcheckbox:
         class: Blast\UtilsBundle\Form\Type\CustomCheckboxType
         tags:
             - { name: form.type, alias: blast_custom_checkbox }
-            
+
     blast_utils.form.type.uniquefield:
         class: Blast\UtilsBundle\Form\Type\UniqueFieldType
         tags:
@@ -28,8 +28,34 @@ services:
         tags: [{ name: twig.extension }]
         calls:
             - [setRouter,['@router']]
-    
+
     blast_utils.twig_extension.html2text:
         class: Blast\UtilsBundle\Twig\Extensions\Html2textExtension
         tags:
             - { name: twig.extension }
+
+    #########  HOOK SYSTEM ############
+    blast_utils.hook.registry:
+        class: Blast\UtilsBundle\Hook\Registry
+
+    blast_utils.twig.hook:
+        class: Blast\UtilsBundle\Twig\Extensions\Hook
+        calls:
+            - [setEventDispatcher, ['@event_dispatcher']]
+        tags:
+            - { name: twig.extension }
+
+    blast_utils.hook.listener:
+        class: Blast\UtilsBundle\Hook\Event\HookListener
+        calls:
+            - [setRegistry, ['@blast_utils.hook.registry']]
+            - [setTemplating, ['@templating']]
+        tags:
+            - { name: kernel.event_listener, event: blast.hook, method: onBlastHook }
+
+
+    #########  HOOKS ############
+    # blast_utils.hook.custom_filters.save:
+    #     class: Blast\UtilsBundle\Hook\CustomFilters\Save
+    #     tags:
+    #         - { name: blast.hook }
