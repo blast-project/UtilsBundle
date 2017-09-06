@@ -13,6 +13,7 @@
 namespace Blast\UtilsBundle\Entity;
 
 use Blast\BaseEntitiesBundle\Entity\Traits\BaseEntity;
+use Blast\CoreBundle\Model\UserInterface;
 
 /**
  * CustomFilter.
@@ -40,6 +41,11 @@ class CustomFilter
      * @var string
      */
     private $filterParameters;
+
+    /**
+     * @var mixed|UserInterface
+     */
+    private $user;
 
     /**
      * @return string
@@ -88,13 +94,17 @@ class CustomFilter
     /**
      * Set routeParameters.
      *
-     * @param string $routeParameters
+     * @param string|mixed $routeParameters
      *
      * @return CustomFilter
      */
     public function setRouteParameters($routeParameters)
     {
-        $this->routeParameters = $routeParameters;
+        if (!is_string($routeParameters)) {
+            $this->routeParameters = json_encode($routeParameters);
+        } else {
+            $this->routeParameters = $routeParameters;
+        }
 
         return $this;
     }
@@ -106,19 +116,23 @@ class CustomFilter
      */
     public function getRouteParameters()
     {
-        return $this->routeParameters;
+        return is_string($this->routeParameters) ? (array) json_decode($this->routeParameters) : $this->routeParameters;
     }
 
     /**
      * Set filterParameters.
      *
-     * @param string $filterParameters
+     * @param string|mixed $filterParameters
      *
      * @return CustomFilter
      */
     public function setFilterParameters($filterParameters)
     {
-        $this->filterParameters = $filterParameters;
+        if (!is_string($filterParameters)) {
+            $this->filterParameters = json_encode($filterParameters);
+        } else {
+            $this->filterParameters = $filterParameters;
+        }
 
         return $this;
     }
@@ -130,6 +144,26 @@ class CustomFilter
      */
     public function getFilterParameters()
     {
-        return $this->filterParameters;
+        return is_string($this->filterParameters) ? (array) json_decode($this->filterParameters) : $this->filterParameters;
+    }
+
+    /**
+     * @return mixed|UserInterface
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed|UserInterface user
+     *
+     * @return self
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }

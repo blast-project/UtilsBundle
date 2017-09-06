@@ -12,6 +12,9 @@
 
 namespace Blast\UtilsBundle\Hook\Component;
 
+use Symfony\Component\HttpFoundation\RequestStack;
+use Doctrine\ORM\EntityManager;
+
 abstract class AbstractHook
 {
     const HOOK_NAME_DUMMY = 'blast.hook.dummy';
@@ -29,6 +32,16 @@ abstract class AbstractHook
      * @var array
      */
     protected $templateParameters = [];
+
+    /**
+     * @var RequestStack
+     */
+    protected $requestStack;
+
+    /**
+     * @var EntityManager
+     */
+    protected $em;
 
     /**
      * handleParameters should handle $templateParameters. It will be called when
@@ -98,4 +111,28 @@ abstract class AbstractHook
 
         return $this;
     }
+
+    /**
+     * @param RequestStack requestStack
+     *
+     * @return self
+     */
+    public function setRequestStack(RequestStack $requestStack)
+    {
+        $this->requestStack = $requestStack;
+
+        return $this;
+    }
+
+        /**
+         * @param EntityManager em
+         *
+         * @return self
+         */
+        public function setEm(EntityManager $em)
+        {
+            $this->em = $em;
+
+            return $this;
+        }
 }

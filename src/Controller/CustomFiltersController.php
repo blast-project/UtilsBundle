@@ -25,36 +25,70 @@ class CustomFiltersController extends Controller
         $routeName = $request->request->get('routeName');
         $routeParameters = json_decode($request->request->get('routeParameters'));
         $filterParameters = json_decode($request->request->get('filterParameters'));
-        // @TODO: Manage user property on CustomFilter
-        // $user = $this->getUser();
+        $user = $this->getUser();
+
+        $customFilterRepository = $this->getDoctrine()->getRepository('BlastUtilsBundle:CustomFilter');
+
+        $redirectUrl = $request->headers->get('referer');
 
         if (!$filterName) {
-            $this->addFlash('error', $this->container->get('translator')->trans('Please define a name for your filter', [], 'messages'));
+            $this->flashTrans('error', 'Please define a name for your filter');
         } else {
-            $existingCustomFilter = $this->getDoctrine()->getRepository('BlastUtilsBundle:CustomFilter')->findOneBy([
+            $existingCustomFilter = $customFilterRepository->findOneBy([
                 'routeName' => $routeName,
                 'name'      => $filterName,
-                // 'user'      => $user
+                'user'      => $user,
             ]);
 
             if ($existingCustomFilter) {
-                $this->addFlash('error', $this->container->get('translator')->trans('Custom filter with this name already exists', [], 'messages'));
+                $this->flashTrans('error', 'Custom filter with this name already exists');
             } else {
-                $newFilter = new CustomFilter();
-                $newFilter
-                    ->setName($filterName)
-                    ->setRouteName($routeName)
-                    ->setRouteParameters(json_encode($routeParameters))
-                    ->setFilterParameters(json_encode($filterParameters))
-                ;
+                $filter = $customFilterRepository->createNewCustomFilter($filterName, $routeName, $routeParameters, $filterParameters, $user);
 
-                $this->getDoctrine()->getManager()->persist($newFilter);
-                $this->getDoctrine()->getManager()->flush($newFilter);
+                $this->flashTrans('success', 'Custom filter successfully saved');
 
-                $this->addFlash('success', $this->container->get('translator')->trans('Custom filter successfully saved', [], 'messages'));
+                $redirectUrl = $this->generateUrl(
+                    $filter->getRouteName(),
+                    array_merge(
+                        $filter->getRouteParameters(),
+                        [
+                            'filter'     => $filter->getFilterParameters(),
+                            'filterName' => $filter->getName(),
+                        ]
+                    )
+                );
             }
         }
 
-        return new RedirectResponse($request->headers->get('referer'));
+        return new RedirectResponse($redirectUrl);
+    }
+
+    public function deleteFilterAction(Request $request)
+    {
+        $filterId = $request->request->get('filterId', null);
+
+        $customFilterRepository = $this->getDoctrine()->getRepository('BlastUtilsBundle:CustomFilter');
+
+        $filter = $customFilterRepository->find($filterId);
+
+        $redirectUrl = $request->headers->get('referer');
+
+        if (!$filter) {
+            $this->flashTrans('error', 'Cannot find filter with ID « %s »');
+        } else {
+            if ($filter->getUser() !== null && $this->getUser() === $filter->getUser()) {
+                $this->getDoctrine()->getManager()->remove($filter);
+                $this->getDoctrine()->getManager()->flush($filter);
+            } else {
+                $this->flashTrans('error', 'This filter doesn\'t belong to you, you cannot delete it');
+            }
+        }
+
+        return new RedirectResponse($redirectUrl);
+    }
+
+    private function flashTrans($type, $messageKey, $catalog = 'messages', $replacements = [])
+    {
+        $this->addFlash($type, $this->container->get('translator')->trans($messageKey, $replacements, $catalog));
     }
 }

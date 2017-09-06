@@ -24,11 +24,22 @@ class Registry
         $this->hooks = [];
     }
 
-    public function registerHook(AbstractHook $hook)
+    public function registerHook(AbstractHook $hook, $hookName = null, $hookTemplate = null)
     {
+        // Update hook attribute « hookName » from service definition (tag)
+        if ($hookName !== null) {
+            $hook->setHookName($hookName);
+        }
+
+        // Update hook attribute « template » from service definition (tag)
+        if ($hookTemplate !== null) {
+            $hook->setTemplate($hookTemplate);
+        }
+
         if ($hook->getHookName() === AbstractHook::HOOK_NAME_DUMMY) {
             throw new \Exception(sprintf('Your hook « %s » must redefine the attribute « hookName » in order to be attached to a real hook', get_class($hook)));
         }
+
         $this->hooks[$hook->getHookName()][] = $hook;
     }
 

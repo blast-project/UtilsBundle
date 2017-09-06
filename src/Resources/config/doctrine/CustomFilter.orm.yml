@@ -17,3 +17,6 @@ Blast\UtilsBundle\Entity\CustomFilter:
         filterParameters:
             type: text
             nullable: true
+    manyToOne:
+        user:
+            targetEntity: Blast\CoreBundle\Model\UserInterface

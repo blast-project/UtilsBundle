@@ -13,16 +13,48 @@
 namespace Blast\UtilsBundle\Hook\Hooks\CustomFilters;
 
 use Blast\UtilsBundle\Hook\Component\AbstractHook;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Blast\UtilsBundle\Repository\CustomFilterRepository;
 
 class Dropdown extends AbstractHook
 {
-    protected $hookName = 'admin.custom_filters.dropdown';
-    protected $template = 'BlastUtilsBundle:Hook/CustomFilters:dropdown.html.twig';
+    /**
+     * @var TokenStorage
+     */
+    private $tokenStorage;
 
     public function handleParameters($hookParameters)
     {
+        /** @var CustomFilterRepository $customFilterRepository */
+        $customFilterRepository = $this->em->getRepository('BlastUtilsBundle:CustomFilter');
+
+        $request = $this->requestStack->getMasterRequest();
+
+        $routeName = $request->get('_route');
+        $filterName = $request->query->get('filterName');
+
+        $user = $this->tokenStorage->getToken()->getUser();
+
+        $currentFitler = $customFilterRepository->findCurrentFilter($routeName, $filterName);
+
         $this->templateParameters = [
-            'customFilters' => []
+            'customFilters' => [
+                'global'        => $customFilterRepository->findGlobalFilters($routeName),
+                'user'          => $customFilterRepository->findUserCustomFilters($routeName, $user),
+                'currentFilter' => $currentFitler,
+            ],
         ];
+    }
+
+    /**
+     * @param TokenStorage tokenStorage
+     *
+     * @return self
+     */
+    public function setTokenStorage(TokenStorage $tokenStorage)
+    {
+        $this->tokenStorage = $tokenStorage;
+
+        return $this;
     }
 }

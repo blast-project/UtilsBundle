@@ -13,6 +13,7 @@
 namespace Blast\UtilsBundle\Hook\Hooks\CustomFilters;
 
 use Blast\UtilsBundle\Hook\Component\AbstractHook;
+use Blast\UtilsBundle\Repository\CustomFilterRepository;
 
 class Save extends AbstractHook
 {
@@ -21,8 +22,18 @@ class Save extends AbstractHook
 
     public function handleParameters($hookParameters)
     {
+        /** @var CustomFilterRepository $customFilterRepository */
+        $customFilterRepository = $this->em->getRepository('BlastUtilsBundle:CustomFilter');
+
+        $request = $this->requestStack->getMasterRequest();
+
+        $routeName = $request->get('_route');
+        $filterName = $request->query->get('filterName');
+
+        $currentFitler = $customFilterRepository->findCurrentFilter($routeName, $filterName);
+
         $this->templateParameters = [
-            'someViewParameter' => 'test'
+            'currentFilter' => $currentFitler,
         ];
     }
 }

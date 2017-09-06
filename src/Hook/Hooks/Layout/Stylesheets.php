@@ -16,6 +16,4 @@ use Blast\UtilsBundle\Hook\Component\AbstractHook;
 
 class Stylesheets extends AbstractHook
 {
-    protected $hookName = 'layout.stylesheets';
-    protected $template = 'BlastUtilsBundle:Hook/Layout:stylesheets.html.twig';
 }

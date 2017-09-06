@@ -16,6 +16,4 @@ use Blast\UtilsBundle\Hook\Component\AbstractHook;
 
 class Javascripts extends AbstractHook
 {
-    protected $hookName = 'layout.javascripts';
-    protected $template = 'BlastUtilsBundle:Hook/Layout:javascripts.html.twig';
 }

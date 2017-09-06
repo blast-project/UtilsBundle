@@ -27,13 +27,15 @@ You can define in your views any hook you want.
 
 <div>
     <h1>Here my custom hook</h1>
-    {{ blast_hook('my.custom.hook', {'someParameters': _context}) }}
+    {{ blast_hook('my.custom.hook', {'someParameters': myVar}) }}
 </div>
 ```
 
+A hook can be declared without using any parameters. If so, the « hook block » won't have any parameters defined in  `handleParameters`'s method parameter (var `$hookParameters` will be an empty array).
+
 #### Declare your Hook class
 
-This class will manage rendering of the hook content by setting `hook name`, `template` and `view parameters`
+This class will manage rendering of the hook content by setting `view parameters` (act as a controller)
 
 ```php
 <?php
@@ -44,9 +46,6 @@ use Blast\UtilsBundle\Hook\AbstractHook;
 
 class MyCustomHookExample extends AbstractHook
 {
-    protected $hookName = 'my.custom.hook';
-    protected $template = 'MyBundle:Hook:my_custom_hook_example.html.twig';
-
     public function handleParameters($hookParameters)
     {
         $this->templateParameters = [
@@ -54,8 +53,9 @@ class MyCustomHookExample extends AbstractHook
         ];
     }
 }
-
 ```
+
+*Note: you can get the current hook name (configured in service definition) in attribute `AbstractHook::hookName` ans the configured template in `AbstractHook::template`*
 
 #### Register the hook class as service
 
@@ -63,10 +63,15 @@ class MyCustomHookExample extends AbstractHook
     my_bundle.hook.my_custom_hook_example:
         class: MyBundle\Hook\MyCustomHook\MyCustomHookExample
         tags:
-            - { name: blast.hook }
+            - { name: blast.hook, hook: my.custom.hook, template: MyBundle:Hook:my_custom_hook_example.html.twig }
 ```
 
-*Please don't forget the tag `blast.hook` in order to register your service as a hook*
+The hook configuration are sets in the service tag :
+- `name`: the service tag name (must be `blast.hook`)
+- `hook`: the target hook where the « block » will be rendered
+- `template`: the twig template of the « block »
+
+_Please don't forget the tag `blast.hook` in order to register your service as a hook_
 
 #### Create your hook template
 
@@ -87,4 +92,30 @@ And voila, you should have this rendered content :
         Here's my first custom hook,  with a view var : a value that will be passed to the twig view !
     </p>
 </div>
+```
+
+### Blast Custom Filters
+
+You only have to set your User class entity in application config.yml (see https://symfony.com/doc/current/doctrine/resolve_target_entity.html for more informations)
+
+```yml
+# app/config/config.yml
+doctrine:
+    # ...
+    orm:
+        # ...
+        resolve_target_entities:
+            Blast\CoreBundle\Model\UserInterface: MyBundle\Entity\MyUser
+```
+
+If you're using Sylius, setting the doctrine.orm `resolve_target_entities` key will not work because Sylius is already using this system. You can declare your Interface / Entity replacement within `SyliusResource` configuration :
+
+```yml
+# app/config/config.yml
+sylius_resource:
+    resources:
+        blast.utils: # this is an arbitrary key
+            classes:
+                model: MyBundle\Entity\MyUser
+                interface: Blast\CoreBundle\Model\UserInterface
 ```

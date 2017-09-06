@@ -9,3 +9,7 @@ blast_utils.unique_field.check_availability:
 blast_utils.custom_filters.save:
     path: blast/customFilters/save
     defaults: { _controller: BlastUtilsBundle:CustomFilters:saveFilter }
+
+blast_utils.custom_filters.delete:
+    path: blast/customFilters/delete
+    defaults: { _controller: BlastUtilsBundle:CustomFilters:deleteFilter }
