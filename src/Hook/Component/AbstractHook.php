@@ -124,15 +124,15 @@ abstract class AbstractHook
         return $this;
     }
 
-        /**
-         * @param EntityManager em
-         *
-         * @return self
-         */
-        public function setEm(EntityManager $em)
-        {
-            $this->em = $em;
+    /**
+     * @param EntityManager em
+     *
+     * @return self
+     */
+    public function setEm(EntityManager $em)
+    {
+        $this->em = $em;
 
-            return $this;
-        }
+        return $this;
+    }
 }
