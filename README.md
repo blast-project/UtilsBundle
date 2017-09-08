@@ -96,6 +96,27 @@ And voila, you should have this rendered content :
 
 ### Blast Custom Filters
 
+Enable the feature in config.yml
+
+```yml
+# app/config/config.yml
+blast_utils:
+    features:
+        customFilters:
+            enabled: true
+```
+
+Optionnaly, you can define your own customFilter entity by setting it as below (don't forget to set the associated repository in order to override `createNewCustomFilter` method) :
+
+```yml
+# app/config/config.yml
+blast_utils:
+    features:
+        customFilters:
+            enabled: true
+            class: MyBundle\Entity\MyCustomFilter
+```
+
 You only have to set your User class entity in application config.yml (see https://symfony.com/doc/current/doctrine/resolve_target_entity.html for more informations)
 
 ```yml

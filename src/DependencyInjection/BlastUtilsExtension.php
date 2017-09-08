@@ -13,6 +13,8 @@
 namespace Blast\UtilsBundle\DependencyInjection;
 
 use Blast\CoreBundle\DependencyInjection\BlastCoreExtension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\FileLoader;
 
 /**
  * This is the class that loads and manages your bundle configuration.
@@ -21,4 +23,17 @@ use Blast\CoreBundle\DependencyInjection\BlastCoreExtension;
  */
 class BlastUtilsExtension extends BlastCoreExtension
 {
+    public function doLoad(ContainerBuilder $container, FileLoader $loader, array $config)
+    {
+        $default = [
+            'features' => [
+                'customFilters'=> [
+                    'enabled' => false,
+                    'class'   => 'Blast\UtilsBundle\Entity\CustomFilter',
+                ],
+            ],
+        ];
+
+        $container->setParameter('blast_utils', array_merge($default, $config));
+    }
 }

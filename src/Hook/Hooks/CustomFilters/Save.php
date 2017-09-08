@@ -20,8 +20,17 @@ class Save extends AbstractHook
     protected $hookName = 'admin.custom_filters.save';
     protected $template = 'BlastUtilsBundle:Hook/CustomFilters:save.html.twig';
 
+    /**
+     * @var array
+     */
+    private $parameters = [];
+
     public function handleParameters($hookParameters)
     {
+        if ($this->parameters['features']['customFilters']['enabled'] === false) {
+            $this->disable();
+        }
+
         /** @var CustomFilterRepository $customFilterRepository */
         $customFilterRepository = $this->em->getRepository('BlastUtilsBundle:CustomFilter');
 
@@ -35,5 +44,17 @@ class Save extends AbstractHook
         $this->templateParameters = [
             'currentFilter' => $currentFitler,
         ];
+    }
+
+    /**
+     * @param array parameters
+     *
+     * @return self
+     */
+    public function setParameters(array $parameters)
+    {
+        $this->parameters = $parameters;
+
+        return $this;
     }
 }

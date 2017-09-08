@@ -23,8 +23,17 @@ class Dropdown extends AbstractHook
      */
     private $tokenStorage;
 
+    /**
+     * @var array
+     */
+    private $parameters = [];
+
     public function handleParameters($hookParameters)
     {
+        if ($this->parameters['features']['customFilters']['enabled'] === false) {
+            $this->disable();
+        }
+
         /** @var CustomFilterRepository $customFilterRepository */
         $customFilterRepository = $this->em->getRepository('BlastUtilsBundle:CustomFilter');
 
@@ -54,6 +63,18 @@ class Dropdown extends AbstractHook
     public function setTokenStorage(TokenStorage $tokenStorage)
     {
         $this->tokenStorage = $tokenStorage;
+
+        return $this;
+    }
+
+    /**
+     * @param array parameters
+     *
+     * @return self
+     */
+    public function setParameters(array $parameters)
+    {
+        $this->parameters = $parameters;
 
         return $this;
     }

@@ -18,6 +18,12 @@ use Doctrine\ORM\EntityManager;
 abstract class AbstractHook
 {
     const HOOK_NAME_DUMMY = 'blast.hook.dummy';
+
+    /**
+     * @var bool
+     */
+    protected $enabled = true;
+
     /**
      * @var string
      */
@@ -132,6 +138,34 @@ abstract class AbstractHook
     public function setEm(EntityManager $em)
     {
         $this->em = $em;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * @return self
+     */
+    public function enable()
+    {
+        $this->enabled = true;
+
+        return $this;
+    }
+
+    /**
+     * @return self
+     */
+    public function disable()
+    {
+        $this->enabled = false;
 
         return $this;
     }

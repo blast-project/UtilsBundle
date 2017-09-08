@@ -33,9 +33,11 @@ class HookListener
 
         foreach ($hooks as $hook) {
             $hook->handleParameters($event->getHookParameters());
-            $event->appendOutput(
-                $this->templating->render($hook->getTemplate(), $hook->getTemplateParameters())
-            );
+            if ($hook->isEnabled()) {
+                $event->appendOutput(
+                    $this->templating->render($hook->getTemplate(), $hook->getTemplateParameters())
+                );
+            }
         }
     }
 

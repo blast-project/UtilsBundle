@@ -60,6 +60,13 @@ services:
         tags:
             - { name: kernel.event_listener, event: blast.hook, method: onBlastHook }
 
+    blast_utils.listener.classmetadata:
+        class: Blast\UtilsBundle\EventListener\LoadClassMetadataListener
+        calls:
+            - [setParameters, ['%blast_utils%']]
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+
 
     #########  HOOKS ############
     blast_utils.hooks.layout.javascripts:
@@ -79,11 +86,14 @@ services:
         class: Blast\UtilsBundle\Hook\Hooks\CustomFilters\Dropdown
         calls:
             - [setTokenStorage, ['@security.token_storage']]
+            - [setParameters, ['%blast_utils%']]
         tags:
             - { name: blast.hook, hook: admin.custom_filters.dropdown, template: BlastUtilsBundle:Hook/CustomFilters:dropdown.html.twig }
 
     blast_utils.hooks.custom_filters.save:
         parent: blast_utils.hooks.abstract_hook
         class: Blast\UtilsBundle\Hook\Hooks\CustomFilters\Save
+        calls:
+            - [setParameters, ['%blast_utils%']]
         tags:
             - { name: blast.hook, hook: admin.custom_filters.save, template: BlastUtilsBundle:Hook/CustomFilters:save.html.twig }

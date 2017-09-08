@@ -19,6 +19,8 @@ use Blast\UtilsBundle\Entity\CustomFilter;
 
 class CustomFiltersController extends Controller
 {
+    private $customFilterClass;
+
     public function saveFilterAction(Request $request)
     {
         $filterName = $request->request->get('filterName');
@@ -27,7 +29,7 @@ class CustomFiltersController extends Controller
         $filterParameters = json_decode($request->request->get('filterParameters'));
         $user = $this->getUser();
 
-        $customFilterRepository = $this->getDoctrine()->getRepository('BlastUtilsBundle:CustomFilter');
+        $customFilterRepository = $this->getDoctrine()->getRepository($this->getCustomFilterCLass());
 
         $redirectUrl = $request->headers->get('referer');
 
@@ -67,7 +69,7 @@ class CustomFiltersController extends Controller
     {
         $filterId = $request->request->get('filterId', null);
 
-        $customFilterRepository = $this->getDoctrine()->getRepository('BlastUtilsBundle:CustomFilter');
+        $customFilterRepository = $this->getDoctrine()->getRepository($this->getCustomFilterCLass());
 
         $filter = $customFilterRepository->find($filterId);
 
@@ -85,6 +87,11 @@ class CustomFiltersController extends Controller
         }
 
         return new RedirectResponse($redirectUrl);
+    }
+
+    public function getCustomFilterCLass()
+    {
+        return $this->customFilterClass = $this->container->getParameter('blast_utils')['features']['customFilters']['class'];
     }
 
     private function flashTrans($type, $messageKey, $catalog = 'messages', $replacements = [])
