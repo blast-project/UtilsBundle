@@ -119,3 +119,33 @@ sylius_resource:
                 model: MyBundle\Entity\MyUser
                 interface: Blast\CoreBundle\Model\UserInterface
 ```
+
+### Blast User Interface
+
+In order to set User mapping with utils entity, the mapping with Interface is used.
+
+There are 2 ways for configuring the real class that will replace the UserInterface :
+
+#### Using Sylius
+
+declare, via resources, the class that will replace the model interface
+
+```yml
+sylius_resource:
+    resources:
+        blast.utils:
+            classes:
+                model: MyBundle\Entity\MyRealUser
+                interface: Blast\CoreBundle\Model\UserInterface
+```
+
+#### Using Syfony's Doctrine target entity resolver :
+
+```yml
+doctrine:
+    # ...
+    orm:
+        #...
+        resolve_target_entities:
+            Blast\CoreBundle\Model\UserInterface: MyBundle\Entity\MyRealUser
+```
