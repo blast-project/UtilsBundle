@@ -33,8 +33,10 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->arrayNode('features')
+                    ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('customFilters')
+                            ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('enabled')
                                     ->defaultValue(false)

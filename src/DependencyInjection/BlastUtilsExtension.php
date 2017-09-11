@@ -25,15 +25,6 @@ class BlastUtilsExtension extends BlastCoreExtension
 {
     public function doLoad(ContainerBuilder $container, FileLoader $loader, array $config)
     {
-        $default = [
-            'features' => [
-                'customFilters'=> [
-                    'enabled' => false,
-                    'class'   => 'Blast\UtilsBundle\Entity\CustomFilter',
-                ],
-            ],
-        ];
-
-        $container->setParameter('blast_utils', array_merge($default, $config));
+        $container->setParameter('blast_utils', $config);
     }
 }
