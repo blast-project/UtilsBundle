@@ -15,7 +15,6 @@ namespace Blast\UtilsBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Blast\UtilsBundle\Entity\CustomFilter;
 
 class CustomFiltersController extends Controller
 {
