@@ -47,9 +47,9 @@ class ChoiceController extends Controller
         $manager->flush();
 
         return new JsonResponse(array(
-            'name' => $choice->getLabel(),
+            'name'  => $choice->getLabel(),
             'value' => $choice->getValue(),
-            'id' => $choice->getId(),
+            'id'    => $choice->getId(),
             )
         );
     }

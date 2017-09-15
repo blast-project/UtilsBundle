@@ -27,13 +27,15 @@ You can define in your views any hook you want.
 
 <div>
     <h1>Here my custom hook</h1>
-    {{ blast_hook('my.custom.hook', {'someParameters': _context}) }}
+    {{ blast_hook('my.custom.hook', {'someParameters': myVar}) }}
 </div>
 ```
 
+A hook can be declared without using any parameters. If so, the « hook block » won't have any parameters defined in  `handleParameters`'s method parameter (var `$hookParameters` will be an empty array).
+
 #### Declare your Hook class
 
-This class will manage rendering of the hook content by setting `hook name`, `template` and `view parameters`
+This class will manage rendering of the hook content by setting `view parameters` (act as a controller)
 
 ```php
 <?php
@@ -54,8 +56,9 @@ class MyCustomHookExample extends AbstractHook
         ];
     }
 }
-
 ```
+
+*Note: you can get the current hook name (configured in service definition) in attribute `AbstractHook::hookName` ans the configured template in `AbstractHook::template`*
 
 #### Register the hook class as service
 
@@ -63,10 +66,15 @@ class MyCustomHookExample extends AbstractHook
     my_bundle.hook.my_custom_hook_example:
         class: MyBundle\Hook\MyCustomHook\MyCustomHookExample
         tags:
-            - { name: blast.hook }
+            - { name: blast.hook, hook: my.custom.hook, template: MyBundle:Hook:my_custom_hook_example.html.twig }
 ```
 
-*Please don't forget the tag `blast.hook` in order to register your service as a hook*
+The hook configuration are sets in the service tag :
+- `name`: the service tag name (must be `blast.hook`)
+- `hook`: the target hook where the « block » will be rendered
+- `template`: the twig template of the « block »
+
+_Please don't forget the tag `blast.hook` in order to register your service as a hook_
 
 #### Create your hook template
 
@@ -87,4 +95,81 @@ And voila, you should have this rendered content :
         Here's my first custom hook,  with a view var : a value that will be passed to the twig view !
     </p>
 </div>
+```
+
+### Blast Custom Filters
+
+Enable the feature in config.yml
+
+```yml
+# app/config/config.yml
+blast_utils:
+    features:
+        customFilters:
+            enabled: true
+```
+
+Optionnaly, you can define your own customFilter entity by setting it as below (don't forget to set the associated repository in order to override `createNewCustomFilter` method) :
+
+```yml
+# app/config/config.yml
+blast_utils:
+    features:
+        customFilters:
+            enabled: true
+            class: MyBundle\Entity\MyCustomFilter
+```
+
+You only have to set your User class entity in application config.yml (see https://symfony.com/doc/current/doctrine/resolve_target_entity.html for more informations)
+
+```yml
+# app/config/config.yml
+doctrine:
+    # ...
+    orm:
+        # ...
+        resolve_target_entities:
+            Blast\CoreBundle\Model\UserInterface: MyBundle\Entity\MyUser
+```
+
+If you're using Sylius, setting the doctrine.orm `resolve_target_entities` key will not work because Sylius is already using this system. You can declare your Interface / Entity replacement within `SyliusResource` configuration :
+
+```yml
+# app/config/config.yml
+sylius_resource:
+    resources:
+        blast.utils: # this is an arbitrary key
+            classes:
+                model: MyBundle\Entity\MyUser
+                interface: Blast\CoreBundle\Model\UserInterface
+```
+
+### Blast User Interface
+
+In order to set User mapping with utils entity, the mapping with Interface is used.
+
+There are 2 ways for configuring the real class that will replace the UserInterface :
+
+#### Using Sylius
+
+declare, via resources, the class that will replace the model interface
+
+```yml
+sylius_resource:
+    resources:
+        blast.utils:
+            classes:
+                model: MyBundle\Entity\MyRealUser
+                interface: Blast\CoreBundle\Model\UserInterface
+```
+
+#### Using Syfony's Doctrine target entity resolver :
+
+```yml
+doctrine:
+    # ...
+    orm:
+        #...
+        resolve_target_entities:
+            Blast\CoreBundle\Model\UserInterface: MyBundle\Entity\MyRealUser
 ```

@@ -55,10 +55,10 @@ class CustomChoiceType extends BaseAbstractType
         };
 
         $resolver->setDefaults([
-            'placeholder' => '',
+            'placeholder'   => '',
             'choices_class' => $defaultClass,
             'choice_loader' => $choiceLoader,
-            'is_filter' => false,
+            'is_filter'     => false,
         ]);
         $resolver->setRequired(['choices_class', 'choices_field']);
         $resolver->setDefined('blast_choices');

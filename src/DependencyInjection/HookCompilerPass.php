@@ -29,7 +29,17 @@ class HookCompilerPass implements CompilerPassInterface
         $taggedServices = $container->findTaggedServiceIds('blast.hook');
 
         foreach ($taggedServices as $id => $tags) {
-            $registry->addMethodCall('registerHook', [new Reference($id)]);
+            $hookName = null;
+            $hookTemplate = null;
+            foreach ($tags as $tag) {
+                if (isset($tag['hook'])) {
+                    $hookName = $tag['hook'];
+                }
+                if (isset($tag['template'])) {
+                    $hookTemplate = $tag['template'];
+                }
+            }
+            $registry->addMethodCall('registerHook', [new Reference($id), $hookName, $hookTemplate]);
         }
     }
 }
