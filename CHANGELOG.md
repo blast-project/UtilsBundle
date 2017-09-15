@@ -1,16 +1,20 @@
 # Change Log
 
-## [0.4.5](https://github.com/blast-project/UtilsBundle/tree/0.4.5) (2017-07-26)
+## [0.5.1](https://github.com/blast-project/UtilsBundle/tree/0.5.1) (2017-09-15)
+[Full Changelog](https://github.com/blast-project/UtilsBundle/compare/0.4.5...0.5.1)
+
+**Merged pull requests:**
+
+- Lisem fix & features [\#20](https://github.com/blast-project/UtilsBundle/pull/20) ([FanchTheSystem](https://github.com/FanchTheSystem))
+- Lisem fix & features [\#19](https://github.com/blast-project/UtilsBundle/pull/19) ([FanchTheSystem](https://github.com/FanchTheSystem))
+
+## [0.4.5](https://github.com/blast-project/UtilsBundle/tree/0.4.5) (2017-07-28)
 [Full Changelog](https://github.com/blast-project/UtilsBundle/compare/0.4.4...0.4.5)
 
 **Merged pull requests:**
 
 - Lisem fix & features [\#14](https://github.com/blast-project/UtilsBundle/pull/14) ([FanchTheSystem](https://github.com/FanchTheSystem))
-- DevKit updates for UtilsBundle [\#13](https://github.com/blast-project/UtilsBundle/pull/13) ([BlastCI](https://github.com/BlastCI))
-- DevKit updates for UtilsBundle [\#12](https://github.com/blast-project/UtilsBundle/pull/12) ([BlastCI](https://github.com/BlastCI))
 - Wip lisem [\#11](https://github.com/blast-project/UtilsBundle/pull/11) ([FanchTheSystem](https://github.com/FanchTheSystem))
-- DevKit updates for UtilsBundle [\#10](https://github.com/blast-project/UtilsBundle/pull/10) ([BlastCI](https://github.com/BlastCI))
-- DevKit updates for UtilsBundle [\#9](https://github.com/blast-project/UtilsBundle/pull/9) ([BlastCI](https://github.com/BlastCI))
 
 ## [0.4.4](https://github.com/blast-project/UtilsBundle/tree/0.4.4) (2017-06-27)
 [Full Changelog](https://github.com/blast-project/UtilsBundle/compare/0.4.3...0.4.4)
@@ -18,20 +22,8 @@
 ## [0.4.3](https://github.com/blast-project/UtilsBundle/tree/0.4.3) (2017-06-13)
 [Full Changelog](https://github.com/blast-project/UtilsBundle/compare/0.4.2...0.4.3)
 
-**Merged pull requests:**
-
-- DevKit updates for UtilsBundle [\#8](https://github.com/blast-project/UtilsBundle/pull/8) ([BlastCI](https://github.com/BlastCI))
-- DevKit updates for UtilsBundle [\#7](https://github.com/blast-project/UtilsBundle/pull/7) ([BlastCI](https://github.com/BlastCI))
-- DevKit updates for UtilsBundle [\#6](https://github.com/blast-project/UtilsBundle/pull/6) ([BlastCI](https://github.com/BlastCI))
-- DevKit updates for UtilsBundle [\#4](https://github.com/blast-project/UtilsBundle/pull/4) ([BlastCI](https://github.com/BlastCI))
-
 ## [0.4.2](https://github.com/blast-project/UtilsBundle/tree/0.4.2) (2017-05-04)
 [Full Changelog](https://github.com/blast-project/UtilsBundle/compare/0.2...0.4.2)
-
-**Merged pull requests:**
-
-- DevKit updates for UtilsBundle [\#3](https://github.com/blast-project/UtilsBundle/pull/3) ([BlastCI](https://github.com/BlastCI))
-- DevKit updates for UtilsBundle [\#1](https://github.com/blast-project/UtilsBundle/pull/1) ([BlastCI](https://github.com/BlastCI))
 
 ## [0.2](https://github.com/blast-project/UtilsBundle/tree/0.2) (2017-03-07)
 [Full Changelog](https://github.com/blast-project/UtilsBundle/compare/0.1...0.2)
