@@ -59,7 +59,7 @@ services:
             - [setTemplating, ['@templating']]
         tags:
             - { name: kernel.event_listener, event: blast.hook, method: onBlastHook }
-
+            
     blast_utils.listener.classmetadata:
         class: Blast\UtilsBundle\EventListener\LoadClassMetadataListener
         calls:

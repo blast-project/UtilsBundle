@@ -46,6 +46,9 @@ use Blast\UtilsBundle\Hook\AbstractHook;
 
 class MyCustomHookExample extends AbstractHook
 {
+    protected $hookName = 'my.custom.hook';
+    protected $template = 'MyBundle:Hook:my_custom_hook_example.html.twig';
+
     public function handleParameters($hookParameters)
     {
         $this->templateParameters = [
