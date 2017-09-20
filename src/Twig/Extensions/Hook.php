@@ -12,7 +12,6 @@
 
 namespace Blast\UtilsBundle\Twig\Extensions;
 
-use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Blast\UtilsBundle\Hook\Component\Event\HookEvent;
 
@@ -39,8 +38,6 @@ class Hook extends \Twig_Extension
 
     public function displayHook(\Twig_Environment $env, $hookName, $hookParameters = null)
     {
-        // $dispatcher = new EventDispatcher();
-
         $hookEvent = new HookEvent($hookName, $hookParameters);
         $this->eventDispatcher->dispatch(HookEvent::NAME, $hookEvent);
 
