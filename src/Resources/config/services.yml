@@ -37,6 +37,8 @@ services:
     #########  HOOK SYSTEM ############
     blast_utils.hook.registry:
         class: Blast\UtilsBundle\Hook\Component\Registry
+        calls:
+            - [setProfiler,['@blast_core.profiler.collector']]
 
     blast_utils.hooks.abstract_hook:
         abstract: true
@@ -59,7 +61,7 @@ services:
             - [setTemplating, ['@templating']]
         tags:
             - { name: kernel.event_listener, event: blast.hook, method: onBlastHook }
-            
+
     blast_utils.listener.classmetadata:
         class: Blast\UtilsBundle\EventListener\LoadClassMetadataListener
         calls:

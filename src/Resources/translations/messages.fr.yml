@@ -1,3 +1,7 @@
+
+blast:
+    utilsbundle: ~
+
 'already exists': 'existe déjà'
 'Edit object': 'Editer l''objet'
 'Save current filter': 'Enregistrer le filtre'

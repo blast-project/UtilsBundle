@@ -43,12 +43,7 @@
             "Blast\\UtilsBundle\\": "src/"
         }
     },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.4.x-dev",
-            "dev-wip-lisem": "0.4.x-dev"
-        }
-    },
+    "version": "dev-wip-lisem",
     "suggest": {
         "blast-project/outer-extension-bundle": "Extend your doctrine entities from the outside"
     }
