@@ -45,5 +45,6 @@
     },
     "suggest": {
         "blast-project/outer-extension-bundle": "Extend your doctrine entities from the outside"
-    }
+    },
+    "version": "dev-wip-lisem"
 }
